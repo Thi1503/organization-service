@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CompanyCreateRequest {
+public class CompanyCreationRequest {
 
     /** Tên công ty */
     private String name;

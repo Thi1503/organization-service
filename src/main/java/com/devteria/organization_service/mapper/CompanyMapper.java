@@ -1,6 +1,6 @@
 package com.devteria.organization_service.mapper;
 
-import com.devteria.organization_service.dto.request.CompanyCreateRequest;
+import com.devteria.organization_service.dto.request.CompanyCreationRequest;
 import com.devteria.organization_service.dto.response.CompanyResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,10 +18,7 @@ import com.devteria.organization_service.entity.Company;
 public interface CompanyMapper {
 
     /** Map từ request tạo mới sang entity */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createDate", ignore = true)
-    @Mapping(target = "updateDate", ignore = true)
-    Company toCompany(CompanyCreateRequest request);
+    Company toCompany(CompanyCreationRequest request);
 
     /** Map từ entity sang response */
     CompanyResponse toCompanyResponse(Company company);
@@ -30,5 +27,5 @@ public interface CompanyMapper {
      * Cập nhật entity hiện có từ request (khi update)
      * Các trường null trong request sẽ được bỏ qua.
      */
-    void updateCompany(@MappingTarget Company company, CompanyCreateRequest request);
+    void updateCompany(@MappingTarget Company company, CompanyCreationRequest request);
 }
