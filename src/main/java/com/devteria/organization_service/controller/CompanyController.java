@@ -1,19 +1,18 @@
 package com.devteria.organization_service.controller;
 
 import com.devteria.organization_service.dto.request.CompanyCreationRequest;
+import com.devteria.organization_service.dto.request.CompanyUpdateRequest;
 import com.devteria.organization_service.dto.response.ApiResponse;
 import com.devteria.organization_service.dto.response.CompanyResponse;
 import com.devteria.organization_service.service.CompanyService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "company")
 @RestController
@@ -30,5 +29,36 @@ public class CompanyController {
                 .result(companyService.createCompany(request))
                 .build();
     }
+
+    @GetMapping
+    ApiResponse<List<CompanyResponse>> getCompanies() {
+        return ApiResponse.<List<CompanyResponse>>builder()
+                .result(companyService.getCompanies())
+                .build();
+    }
+
+    @GetMapping("/{companyId}")
+    ApiResponse<CompanyResponse> getUser(@PathVariable("companyId") String userId) {
+        return ApiResponse.<CompanyResponse>builder()
+                .result(companyService.getCompanyById(userId))
+                .build();
+    }
+
+    @DeleteMapping("/{companyId}")
+    ApiResponse<String> deleteUser(@PathVariable String companyId) {
+        companyService.deleteCompanyById(companyId);
+        return ApiResponse.<String>builder().result("Company has been deleted").build();
+    }
+
+    @PutMapping("/{companyId}")
+    public ApiResponse<CompanyResponse> updateCompany(@PathVariable String companyId,
+                                                         @RequestBody CompanyUpdateRequest request) {
+        log.info("PUT /api/company/{} - updateCompany", companyId);
+        CompanyResponse response = companyService.updateCompany(companyId, request);
+        return ApiResponse.<CompanyResponse>builder()
+                .result(companyService.getCompanyById(companyId))
+                .build();
+    }
+
 
 }
