@@ -114,4 +114,8 @@ public class DepartmentService {
 
         departmentRepository.deleteById(id);
     }
+
+    public boolean existsById(String departmentId) {
+        return departmentRepository.existsById(departmentId);
+    }
 }

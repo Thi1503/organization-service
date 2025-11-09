@@ -90,4 +90,12 @@ public class DepartmentController {
                 .message("Xóa phòng ban thành công")
                 .build();
     }
+
+    // Kiểm tra tồn tại
+    @GetMapping("/{departmentId}/exists")
+    public ApiResponse<Boolean> existsCompany(@PathVariable("departmentId") String companyId) {
+        return ApiResponse.<Boolean>builder()
+                .result(departmentService.existsById(companyId))
+                .build();
+    }
 }

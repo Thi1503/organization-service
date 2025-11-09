@@ -85,4 +85,7 @@ public class CompanyService {
     }
 
 
+    public boolean existsById(String companyId) {
+        return companyRepository.existsById(companyId);
+    }
 }

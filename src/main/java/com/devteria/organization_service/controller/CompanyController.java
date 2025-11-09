@@ -24,7 +24,7 @@ public class CompanyController {
     CompanyService companyService;
 
     @PostMapping
-    ApiResponse<CompanyResponse> createUser(@RequestBody  CompanyCreationRequest request) {
+    ApiResponse<CompanyResponse> createCompany(@RequestBody  CompanyCreationRequest request) {
         return ApiResponse.<CompanyResponse>builder()
                 .result(companyService.createCompany(request))
                 .build();
@@ -38,14 +38,14 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyId}")
-    ApiResponse<CompanyResponse> getUser(@PathVariable("companyId") String userId) {
+    ApiResponse<CompanyResponse> getCompany(@PathVariable("companyId") String userId) {
         return ApiResponse.<CompanyResponse>builder()
                 .result(companyService.getCompanyById(userId))
                 .build();
     }
 
     @DeleteMapping("/{companyId}")
-    ApiResponse<String> deleteUser(@PathVariable String companyId) {
+    ApiResponse<String> deleteCompany(@PathVariable String companyId) {
         companyService.deleteCompanyById(companyId);
         return ApiResponse.<String>builder().result("Company has been deleted").build();
     }
@@ -57,6 +57,14 @@ public class CompanyController {
         CompanyResponse response = companyService.updateCompany(companyId, request);
         return ApiResponse.<CompanyResponse>builder()
                 .result(companyService.getCompanyById(companyId))
+                .build();
+    }
+
+    // Kiểm tra tồn tại
+    @GetMapping("/{companyId}/exists")
+    public ApiResponse<Boolean> existsCompany(@PathVariable("companyId") String companyId) {
+        return ApiResponse.<Boolean>builder()
+                .result(companyService.existsById(companyId))
                 .build();
     }
 
