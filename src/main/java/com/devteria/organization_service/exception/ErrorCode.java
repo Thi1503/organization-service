@@ -10,6 +10,10 @@ public enum ErrorCode {
 
     /// Đầu 1xx bắt lỗi Exception
     COMPANY_EXISTED(102, "Công ty đã tồn tại", HttpStatus.BAD_REQUEST),
+    COMPANY_NOT_FOUND(103, "Không tìm thấy công ty", HttpStatus.NOT_FOUND),
+    COMPANY_NAME_REQUIRED(104, "Tên công ty là bắt buộc", HttpStatus.BAD_REQUEST),
+    COMPANY_ID_REQUIRED(105, "Thiếu ID công ty", HttpStatus.BAD_REQUEST),
+    COMPANY_DELETE_FAILED(106, "Không thể xóa công ty", HttpStatus.INTERNAL_SERVER_ERROR),
 
 
     /// Đầu 2xx bắt lỗi auth
