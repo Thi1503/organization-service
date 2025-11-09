@@ -14,6 +14,9 @@ public enum ErrorCode {
     COMPANY_NAME_REQUIRED(104, "Tên công ty là bắt buộc", HttpStatus.BAD_REQUEST),
     COMPANY_ID_REQUIRED(105, "Thiếu ID công ty", HttpStatus.BAD_REQUEST),
     COMPANY_DELETE_FAILED(106, "Không thể xóa công ty", HttpStatus.INTERNAL_SERVER_ERROR),
+    DEPARTMENT_NOT_FOUND(107, "Không tìm thấy phòng ban", HttpStatus.NOT_FOUND),
+    DEPARTMENT_EXISTED(108, "Phòng ban đã tồn tại", HttpStatus.BAD_REQUEST),
+
 
 
     /// Đầu 2xx bắt lỗi auth
